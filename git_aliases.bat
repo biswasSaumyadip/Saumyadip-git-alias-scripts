@@ -1,0 +1,70 @@
+@echo off
+echo Setting Git aliases globally...
+
+REM Function-style aliases (PowerShell-like syntax) are skipped or simplified
+
+call :add_alias gs "!git status"
+call :add_alias ps "!git push"
+call :add_alias publish "!git push -u origin HEAD"
+call :add_alias cdf ""
+call :add_alias pr ""
+call :add_alias br "!git branch"
+call :add_alias brr "!git branch -a"
+call :add_alias shm "!git stash push -m"
+call :add_alias shl "!git stash list"
+call :add_alias d "!git diff --color-words"
+call :add_alias sw "!git switch"
+call :add_alias create "!git switch -c"
+call :add_alias fap "!git fetch --prune"
+call :add_alias blame "!git blame -w -M -C"
+call :add_alias alias "!gitmonthfull=git"
+call :add_alias ac "!git add -A && git commit -m"
+call :add_alias undo "!git reset --soft HEAD^"
+call :add_alias uselast "!git stash apply stash@{0}"
+call :add_alias qa "!git commit -m"
+call :add_alias reset-hard "!git reset --hard HEAD^"
+call :add_alias lol "log --oneline"
+call :add_alias delete-branch "!git branch -d"
+call :add_alias find "!git log --all --grep="
+call :add_alias copypath "!git rev-parse --show-toplevel | sed -e s#/#\\\\#g | clip"
+call :add_alias aliases "!git config --get-regexp \"alias\\.\""
+call :add_alias today "log --since=midnight --oneline --graph"
+call :add_alias this-week "log --since=1 week ago --oneline --graph"
+call :add_alias this-month "log --since=2023-01-01 --oneline --graph"
+call :add_alias yesterday "log --since=yesterday --until=midnight --oneline --graph"
+call :add_alias last-7-days "log --since=7 days ago --oneline --graph"
+call :add_alias today-diff "log --since=midnight -p"
+call :add_alias today-me "log --since=midnight --author=%USERNAME% --oneline --graph"
+call :add_alias today-time "log --since=midnight --pretty=format:'%%h %%ad | %%s [%%an]' --date=short"
+call :add_alias last "log -1 --stat"
+call :add_alias clean-slate "reset --hard && git clean -fd"
+call :add_alias push-safe "push --force-with-lease"
+call :add_alias push-all "push --all"
+call :add_alias pull-safe "pull --ff-only"
+call :add_alias branches "branch -v"
+call :add_alias recent-branches "for-each-ref --sort=-committerdate --format='%%(refname:short) - %%(committerdate:relative)' refs/heads/"
+call :add_alias remote-branches "branch -r"
+call :add_alias ignored "ls-files --others --ignored --exclude-standard"
+call :add_alias top-contributors "shortlog -sn --all"
+call :add_alias config "config --list --global"
+call :add_alias squash "rebase -i HEAD~5"
+call :add_alias history "log --pretty=format:'%%h %%ad | %%s [%%an]' --date=short"
+call :add_alias edit-last "commit --amend"
+call :add_alias uncommit "reset --soft HEAD~1"
+call :add_alias modified "ls-files -m"
+call :add_alias pushnew "!git push --set-upstream origin %cd%"
+call :add_alias colast "checkout -"
+call :add_alias pull-rebase "pull --rebase"
+call :add_alias prep "pull --rebase"
+call :add_alias sync-safe "!git pull --ff-only && git push"
+call :add_alias acp "!git add -p && git commit -m && git push"
+call :add_alias update-all "!git fetch --all --prune && echo update manually"
+call :add_alias alias.fixmsh "!git commit --amend -m"
+
+echo Done.
+goto :eof
+
+:add_alias
+git config --global alias.%1 %2
+echo ✓ %1
+goto :eof
