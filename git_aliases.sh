@@ -21,9 +21,9 @@ git config --global alias.alias 'gitmonthfull=git'
 git config --global alias.ac '!git add -A && git commit -m'
 git config --global alias.undo '!git reset --soft HEAD^'
 git config --global alias.uselast '!git stash apply stash@{0}'
-git config --global alias.sha "!f() { git stash apply stash@{}; }; f"
-git config --global alias.shs "!f() { git stash show -p stash@{}; }; f"
-git config --global alias.shaf "!f() { git checkout stash@{} -- ; }; f"
+git config --global alias.sha "!f() { git stash apply stash@\{$1\}; }; f"
+git config --global alias.shs "!f() { git stash show -p stash@\{$1\}; }; f"
+git config --global alias.shaf "!f() { git checkout stash@\{$1\} -- ; }; f"
 git config --global alias.qa '!git commit -m'
 git config --global alias.reset-hard '!git reset --hard HEAD^'
 git config --global alias.alias-add "!f() { git config --global alias.\"$1\" \"$2\"; }; f"
